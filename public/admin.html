@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>coffcoff — admin</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <h1>moderation inbox</h1>
+
+  <div class="tabs">
+    <button class="tab-button active" data-status="pending">Pending <span id="pending-count" class="count"></span></button>
+    <button class="tab-button" data-status="approved">Approved</button>
+    <button class="tab-button" data-status="rejected">Rejected</button>
+  </div>
+
+  <section id="admin-list"></section>
+
+  <script src="/admin.js"></script>
+</body>
+</html>

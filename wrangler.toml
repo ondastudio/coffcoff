@@ -1,0 +1,11 @@
+name = "coffcoff"
+pages_build_output_dir = "public"
+compatibility_date = "2026-09-21"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "coffcoff-db"
+database_id = "a1ab555a-fd30-4fd2-b133-0940690b6f4c"
+
+[ai]
+binding = "AI"

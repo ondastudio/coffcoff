@@ -1,7 +1,7 @@
 import { MAX_MESSAGE_LENGTH, RATE_LIMIT_MAX_MESSAGES, RATE_LIMIT_WINDOW_MINUTES } from '../_lib/config.js';
 import { jsonResponse } from '../_lib/http.js';
 import { hashIp } from '../_lib/hash.js';
-import { findBlockedWord } from '../_lib/wordlist.js';
+import { verificar } from '../_lib/wordlist.js';
 import { checkModerationApi } from '../_lib/moderation.js';
 import { verifyTurnstileToken } from '../_lib/turnstile.js';
 import { isRateLimited } from '../_lib/ratelimit.js';
@@ -71,9 +71,9 @@ export async function onRequestPost(context) {
 // Word list first (cheap, no inference cost) — if it hits, skip the model call entirely.
 // Otherwise call Llama Guard; on any failure, fail safe to 'pending' rather than publish unchecked.
 async function moderate(text, env) {
-  const blockedWord = findBlockedWord(text);
-  if (blockedWord) {
-    return { status: 'pending', flagReason: `blocked word: "${blockedWord}"` };
+  const hits = verificar(text);
+  if (hits.length) {
+    return { status: 'pending', flagReason: `wordlist: ${hits.join(', ')}` };
   }
 
   try {
